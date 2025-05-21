@@ -15,7 +15,6 @@ import { draftMode } from 'next/headers'
 
 import './globals.css'
 import { getServerSideURL } from '@/utilities/getURL'
-import { Navigation } from '@/components/Navbar/Navbar'
 
 export default async function RootLayout({ children }: { children: React.ReactNode }) {
   const { isEnabled } = await draftMode()
@@ -32,16 +31,16 @@ export default async function RootLayout({ children }: { children: React.ReactNo
         <link rel="icon" type="image/png" sizes="192x192" href="/favicon-192x192.png" />
         <link rel="icon" type="image/png" sizes="512x512" href="/favicon-512x512.png" />
       </head>
-      <body>
+      <body className={``}>
         <Providers>
-          {/*  <AdminBar*/}
-          {/*    adminBarProps={{*/}
-          {/*      preview: isEnabled,*/}
-          {/*    }}*/}
-          {/*  />*/}
-
-          {/*  <Header />*/}
-          <Navigation />
+          {/*<AdminBar*/}
+          {/*  adminBarProps={{*/}
+          {/*    preview: isEnabled,*/}
+          {/*  }}*/}
+          {/*/>*/}
+          {/**/}
+          {/*<Header />*/}
+          {/*<Navigation />*/}
 
           {children}
           {/*<Footer />*/}

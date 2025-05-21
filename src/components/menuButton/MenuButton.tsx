@@ -8,7 +8,7 @@ type MenuButtonProps = {
 export const MenuButton = ({ onClick, open }: MenuButtonProps) => {
   return (
     <>
-      <div className={`center z-[101] ml-auto cursor-pointer`}>
+      <div className={` flex items-center   z-[101] ml-auto cursor-pointer  `}>
         <button
           onClick={onClick}
           className={styles.navBtn}

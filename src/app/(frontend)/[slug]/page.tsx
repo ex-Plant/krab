@@ -12,6 +12,7 @@ import { RenderHero } from '@/heros/RenderHero'
 import { generateMeta } from '@/utilities/generateMeta'
 import PageClient from './page.client'
 import { LivePreviewListener } from '@/components/LivePreviewListener'
+import { CrabsLoader } from '@/components/CrabsLoader/CrabsLoader'
 
 export async function generateStaticParams() {
   const payload = await getPayload({ config: configPromise })
@@ -48,26 +49,36 @@ export default async function Page({ params: paramsPromise }: Args) {
   const { slug = 'home' } = await paramsPromise
   const url = '/' + slug
 
-  let page: RequiredDataFromCollectionSlug<'pages'> | null
-
-  page = await queryPageBySlug({
+  const page: RequiredDataFromCollectionSlug<'pages'> | null = await queryPageBySlug({
     slug,
   })
 
   // Remove this code once your website is seeded
-  if (!page && slug === 'home') {
-    page = homeStatic
-  }
+  // if (!page && slug === 'home') {
+  //   page = homeStatic
+  // }
+
+  // console.log({ slug })
+
+  // console.log({ page })
+
+  // if (slug === 'home') {
+  //   return <CrabsLoader />
+  // }
 
   if (!page) {
     return <PayloadRedirects url={url} />
   }
 
+  console.log({ page })
+
   const { hero, layout } = page
 
+  // return <CrabsLoader />
+
   return (
-    <article className="pt-16 pb-24">
-      <PageClient />
+    <article className="">
+      <PageClient page={page} />
       {/* Allows redirects for valid pages too */}
       <PayloadRedirects disableNotFound url={url} />
 

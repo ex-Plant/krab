@@ -16,7 +16,7 @@ export const hero: Field = {
     {
       name: 'type',
       type: 'select',
-      defaultValue: 'lowImpact',
+      // defaultValue: 'lowImpact',
       label: 'Type',
       options: [
         {
@@ -35,6 +35,10 @@ export const hero: Field = {
           label: 'Low Impact',
           value: 'lowImpact',
         },
+        // {
+        //   label: 'Test',
+        //   value: 'test',
+        // },
       ],
       required: true,
     },
