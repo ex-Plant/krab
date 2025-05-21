@@ -8,6 +8,7 @@ export default function Test() {
           <div className={`text-3xl animate-bounce`}>🦀</div>
           <div className={`text-3xl animate-bounce delay-100`}>🦀</div>
           <div className={`text-3xl animate-bounce delay-200`}>🦀</div>
+          <div className={`text-3xl animate-bounce delay-200`}>🦀</div>
         </div>
         <footer className={` mb-8 text-center `}>Coming soon...</footer>
       </div>
