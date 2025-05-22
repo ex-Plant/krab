@@ -41,16 +41,19 @@ export async function generateStaticParams() {
 type Args = {
   params: Promise<{
     slug?: string
+    locale?: string
   }>
 }
 
 export default async function Page({ params: paramsPromise }: Args) {
   const { isEnabled: draft } = await draftMode()
-  const { slug = 'home' } = await paramsPromise
+  const { slug = 'home', locale = 'pl' } = await paramsPromise
+
   const url = '/' + slug
 
   const page: RequiredDataFromCollectionSlug<'pages'> | null = await queryPageBySlug({
     slug,
+    locale,
   })
 
   // Remove this code once your website is seeded
@@ -91,25 +94,27 @@ export default async function Page({ params: paramsPromise }: Args) {
 }
 
 export async function generateMetadata({ params: paramsPromise }: Args): Promise<Metadata> {
-  const { slug = 'home' } = await paramsPromise
+  const { slug = 'home', locale = 'pl' } = await paramsPromise
+  console.log(slug, locale)
   const page = await queryPageBySlug({
     slug,
+    locale,
   })
 
   return generateMeta({ doc: page })
 }
 
-const queryPageBySlug = cache(async ({ slug }: { slug: string }) => {
+const queryPageBySlug = cache(async ({ slug, locale }: { slug: string; locale: string }) => {
   const { isEnabled: draft } = await draftMode()
+
+  let safeLocale: 'pl' | 'en' = 'pl'
+  if (locale === 'pl' || locale === 'en') safeLocale = locale
 
   const payload = await getPayload({ config: configPromise })
 
-  const cookieStore = await cookies()
-  const locale = cookieStore.get('locale')?.value || 'pl'
-
   const result = await payload.find({
     collection: 'pages',
-    locale: locale,
+    locale: safeLocale,
     draft,
     limit: 1,
     pagination: false,
