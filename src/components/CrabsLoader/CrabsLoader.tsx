@@ -6,6 +6,8 @@ type CrabsLoaderBlock = Extract<Page['layout'][number], { blockType: 'crabsLoade
 
 export const CrabsLoader: React.FC<CrabsLoaderBlock> = (props) => {
   const { text } = props
+
+  console.log(text)
   return (
     <>
       <div className={` h-svh flex flex-col   `}>

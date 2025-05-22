@@ -4,6 +4,7 @@ import { cn } from '@/utilities/ui'
 import { GeistMono } from 'geist/font/mono'
 import { GeistSans } from 'geist/font/sans'
 import React from 'react'
+import { TranslationProvider } from '@payloadcms/ui'
 
 import { AdminBar } from '@/components/AdminBar'
 import { Footer } from '@/Footer/Component'
@@ -11,13 +12,17 @@ import { Header } from '@/Header/Component'
 import { Providers } from '@/providers'
 import { InitTheme } from '@/providers/Theme/InitTheme'
 import { mergeOpenGraph } from '@/utilities/mergeOpenGraph'
-import { draftMode } from 'next/headers'
+import { cookies, draftMode } from 'next/headers'
 
 import './globals.css'
 import { getServerSideURL } from '@/utilities/getURL'
+import LanguageSwitcher from '@/components/LanguageSwither/LanguageSwitcher'
 
 export default async function RootLayout({ children }: { children: React.ReactNode }) {
   const { isEnabled } = await draftMode()
+
+  const cookieStore = await cookies()
+  const locale = cookieStore.get('locale')?.value || 'pl'
 
   return (
     <html className={cn(GeistSans.variable, GeistMono.variable)} lang="en" suppressHydrationWarning>
@@ -33,6 +38,7 @@ export default async function RootLayout({ children }: { children: React.ReactNo
       </head>
       <body className={``}>
         <Providers>
+          <LanguageSwitcher language={locale} />
           {/*<AdminBar*/}
           {/*  adminBarProps={{*/}
           {/*    preview: isEnabled,*/}

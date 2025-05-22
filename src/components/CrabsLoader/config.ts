@@ -19,7 +19,8 @@ export const CrabsLoaderBlock: Block = {
         pl: 'Tekst Kraba',
       },
       required: false,
-      defaultValue: '🦀 Default crab text!',
+      defaultValue: '🦀...🦀...🦀',
+      localized: true,
     },
     // Add more fields if you want more customization
   ],

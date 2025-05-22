@@ -24,6 +24,22 @@ const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
 
 export default buildConfig({
+  localization: {
+    locales: [
+      {
+        label: 'English',
+        code: 'en',
+      },
+      {
+        label: 'POLISH',
+        code: 'pl',
+        // opt-in to setting default text-alignment on Input fields to rtl (right-to-left)
+        // when current locale is rtl
+      },
+    ],
+    defaultLocale: 'pl', // required
+    fallback: true, // defaults to true
+  },
   i18n: {
     // fallback: 'pl',
     //@ts-expect-error - This works
