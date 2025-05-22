@@ -3,14 +3,21 @@ import { Block } from 'payload'
 export const CrabsLoaderBlock: Block = {
   slug: 'crabsLoader',
   labels: {
-    singular: 'Crabs Loader',
+    singular: {
+      en: 'Crabs Loader',
+      pl: 'Kraby Czekadełko',
+    },
+
     plural: 'Crabs Loaders',
   },
   fields: [
     {
       name: 'text',
       type: 'text',
-      label: 'Crab Text',
+      label: {
+        en: 'Crab Text',
+        pl: 'Tekst Kraba',
+      },
       required: false,
       defaultValue: '🦀 Default crab text!',
     },
