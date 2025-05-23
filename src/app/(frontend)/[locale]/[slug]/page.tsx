@@ -27,13 +27,16 @@ export async function generateStaticParams() {
     },
   })
 
-  const params = pages.docs
-    ?.filter((doc) => {
-      return doc.slug !== 'home'
-    })
-    .map(({ slug }) => {
-      return { slug }
-    })
+  console.log(pages, 'pages')
+  const locales = ['pl', 'en']
+
+  const params = locales.flatMap((locale) =>
+    pages.docs
+      ?.filter((doc) => doc.slug !== 'home')
+      .map((doc) => {
+        return { locale, slug: doc.slug }
+      }),
+  )
 
   return params
 }
@@ -108,7 +111,7 @@ const queryPageBySlug = cache(async ({ slug, locale }: { slug: string; locale: s
   const { isEnabled: draft } = await draftMode()
 
   let safeLocale: 'pl' | 'en' = 'pl'
-  if (locale === 'pl' || locale === 'en') safeLocale = locale
+  if (locale === 'en') safeLocale = locale
 
   const payload = await getPayload({ config: configPromise })
 
